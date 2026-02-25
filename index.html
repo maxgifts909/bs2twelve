@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blacksprut — перейти на сайт</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bark: #3B2F2F;
+  --bark-light: #5C4A3A;
+  --leaf: #4A7C59;
+  --leaf-light: #6B9E7A;
+  --leaf-bright: #8FBF6B;
+  --cream: #FAF5EE;
+  --sand: #F0E8D8;
+  --gold: #C8A951;
+  --gold-light: #E8D48B;
+  --moss: #2D5016;
+  --shadow: rgba(59, 47, 47, 0.12);
+  --text: #2C2420;
+  --text-light: #6B5E54;
+  --white: #FFFFFF;
+  --radius: 12px;
+  --radius-lg: 20px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  color: var(--text);
+  background: var(--cream);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 { font-family: 'Playfair Display', serif; line-height: 1.2; }
+
+a { text-decoration: none; color: inherit; }
+
+img { max-width: 100%; display: block; }
+
+/* ===== HEADER ===== */
+.header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(250, 245, 238, 0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(74, 124, 89, 0.15);
+  transition: all 0.4s;
+}
+
+.header.scrolled {
+  background: rgba(250, 245, 238, 0.97);
+  box-shadow: 0 4px 30px var(--shadow);
+}
+
+.header-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px;
+}
+
+.logo {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; font-weight: 900;
+  color: var(--bark);
+}
+
+.logo-icon {
+  width: 42px; height: 42px;
+  background: linear-gradient(135deg, var(--leaf), var(--moss));
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 1.2rem;
+  box-shadow: 0 4px 12px rgba(74, 124, 89, 0.3);
+}
+
+.nav { display: flex; align-items: center; gap: 32px; }
+
+.nav a {
+  font-size: 0.95rem; font-weight: 600;
+  color: var(--text-light);
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav a::after {
+  content: ''; position: absolute;
+  bottom: -4px; left: 0; width: 0; height: 2px;
+  background: var(--leaf);
+  transition: width 0.3s;
+}
+
+.nav a:hover { color: var(--leaf); }
+.nav a:hover::after { width: 100%; }
+
+.burger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 8px;
+  background: none; border: none;
+}
+
+.burger span {
+  width: 24px; height: 2px;
+  background: var(--bark);
+  transition: all 0.3s;
+  border-radius: 2px;
+}
+
+.burger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger.active span:nth-child(2) { opacity: 0; }
+.burger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-nav {
+  display: none;
+  position: fixed; top: 72px; left: 0; right: 0; bottom: 0;
+  background: var(--cream);
+  padding: 40px 24px;
+  flex-direction: column; gap: 24px;
+  z-index: 999;
+}
+
+.mobile-nav.active { display: flex; }
+
+.mobile-nav a {
+  font-size: 1.4rem; font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  color: var(--bark);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 100px 24px 60px;
+}
+
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(74, 124, 89, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 30%, rgba(200, 169, 81, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 90%, rgba(59, 47, 47, 0.04) 0%, transparent 40%);
+}
+
+.hero-pattern {
+  position: absolute; inset: 0; z-index: 0;
+  opacity: 0.03;
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 L30 55 M20 15 L30 5 L40 15 M15 25 L30 15 M45 25 L30 15 M18 35 L30 25 M42 35 L30 25' stroke='%233B2F2F' fill='none' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+.hero-inner {
+  max-width: 1280px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center;
+  position: relative; z-index: 1;
+}
+
+.hero-content { animation: fadeUp 1s ease-out; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(74, 124, 89, 0.1);
+  border: 1px solid rgba(74, 124, 89, 0.2);
+  border-radius: 50px; padding: 6px 18px 6px 12px;
+  font-size: 0.85rem; font-weight: 600;
+  color: var(--leaf); margin-bottom: 24px;
+}
+
+.hero-badge span {
+  width: 8px; height: 8px;
+  background: var(--leaf-bright);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.hero h1 {
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  color: var(--bark);
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.hero h1 em {
+  color: var(--leaf);
+  font-style: italic;
+}
+
+.hero p {
+  font-size: 1.15rem;
+  color: var(--text-light);
+  max-width: 480px;
+  margin-bottom: 36px;
+}
+
+.hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 32px; border-radius: 50px;
+  font-size: 0.95rem; font-weight: 600;
+  font-family: 'Source Sans 3', sans-serif;
+  border: none; cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--leaf), var(--moss));
+  color: white;
+  box-shadow: 0 4px 20px rgba(74, 124, 89, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(74, 124, 89, 0.4);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--bark);
+  border: 2px solid var(--bark-light);
+}
+
+.btn-secondary:hover {
+  background: var(--bark);
+  color: var(--cream);
+}
+
+.hero-visual {
+  position: relative;
+  animation: fadeUp 1s ease-out 0.2s both;
+}
+
+.hero-image-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(59, 47, 47, 0.15);
+  position: relative;
+  aspect-ratio: 4/5;
+  background: var(--sand);
+}
+
+.hero-image-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.hero-float-card {
+  position: absolute;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  box-shadow: 0 8px 30px var(--shadow);
+  animation: float 6s ease-in-out infinite;
+}
+
+.hero-float-card.stat1 {
+  bottom: 40px; left: -30px;
+}
+
+.hero-float-card.stat2 {
+  top: 40px; right: -20px;
+  animation-delay: -3s;
+}
+
+.float-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem; font-weight: 900;
+  color: var(--leaf);
+}
+
+.float-label {
+  font-size: 0.8rem; color: var(--text-light);
+  font-weight: 600;
+}
+
+/* ===== STATS BAR ===== */
+.stats-bar {
+  background: var(--bark);
+  padding: 48px 24px;
+}
+
+.stats-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 32px; text-align: center;
+}
+
+.stat-item { color: var(--cream); }
+
+.stat-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem; font-weight: 900;
+  color: var(--gold);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-top: 4px;
+}
+
+/* ===== SECTION COMMON ===== */
+.section {
+  padding: 100px 24px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: 0.8rem; font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--leaf);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  color: var(--bark);
+  margin-bottom: 16px;
+}
+
+.section-desc {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  max-width: 600px; margin: 0 auto;
+}
+
+/* ===== CATALOG ===== */
+.catalog-grid {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.tree-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 4px 20px var(--shadow);
+  transition: all 0.4s;
+  cursor: pointer;
+}
+
+.tree-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(59, 47, 47, 0.18);
+}
+
+.tree-card-img {
+  height: 240px;
+  overflow: hidden;
+  position: relative;
+}
+
+.tree-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s;
+}
+
+.tree-card:hover .tree-card-img img {
+  transform: scale(1.08);
+}
+
+.tree-card-badge {
+  position: absolute; top: 16px; left: 16px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  padding: 4px 14px;
+  border-radius: 50px;
+  font-size: 0.75rem; font-weight: 700;
+  color: var(--leaf);
+}
+
+.tree-card-body { padding: 24px; }
+
+.tree-card-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 700;
+  color: var(--bark);
+  margin-bottom: 4px;
+}
+
+.tree-card-latin {
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 12px;
+}
+
+.tree-card-desc {
+  font-size: 0.92rem;
+  color: var(--text-light);
+  margin-bottom: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tree-stats {
+  display: flex; gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.tree-stat {
+  display: flex; flex-direction: column;
+}
+
+.tree-stat-val {
+  font-weight: 700; font-size: 0.95rem;
+  color: var(--leaf);
+}
+
+.tree-stat-lbl {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+/* ===== COMPARISON TABLE ===== */
+.section-compare { background: var(--sand); }
+
+.compare-wrap {
+  max-width: 1000px; margin: 0 auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 4px 20px var(--shadow);
+  min-width: 700px;
+}
+
+.compare-table th {
+  background: var(--bark);
+  color: var(--cream);
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  padding: 18px 20px;
+  text-align: left;
+  font-weight: 700;
+}
+
+.compare-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  font-size: 0.92rem;
+}
+
+.compare-table tr:last-child td { border-bottom: none; }
+
+.compare-table tbody tr:hover { background: rgba(74, 124, 89, 0.04); }
+
+.compare-table td:first-child {
+  font-weight: 700;
+  color: var(--bark);
+  font-family: 'Playfair Display', serif;
+}
+
+.bar-cell { position: relative; }
+.bar-visual {
+  height: 6px;
+  background: linear-gradient(90deg, var(--leaf), var(--leaf-bright));
+  border-radius: 3px;
+  margin-top: 6px;
+  transition: width 1s ease-out;
+}
+
+/* ===== FORUM ===== */
+.forum-list {
+  max-width: 900px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: 16px;
+}
+
+.forum-item {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  display: flex; align-items: flex-start; gap: 20px;
+  box-shadow: 0 2px 12px var(--shadow);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.forum-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 20px var(--shadow);
+}
+
+.forum-avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--leaf), var(--leaf-light));
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 700; font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.forum-content { flex: 1; min-width: 0; }
+
+.forum-title-row {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 6px; flex-wrap: wrap;
+}
+
+.forum-topic-title {
+  font-weight: 700;
+  color: var(--bark);
+  font-size: 1.05rem;
+}
+
+.forum-tag {
+  font-size: 0.7rem; font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.tag-discussion { background: rgba(74, 124, 89, 0.12); color: var(--leaf); }
+.tag-question { background: rgba(200, 169, 81, 0.2); color: #9A7A20; }
+.tag-guide { background: rgba(59, 47, 47, 0.1); color: var(--bark-light); }
+.tag-hot { background: rgba(200, 60, 60, 0.12); color: #B33; }
+
+.forum-excerpt {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.forum-meta {
+  display: flex; gap: 20px;
+  font-size: 0.8rem; color: var(--text-light);
+}
+
+.forum-meta span { display: flex; align-items: center; gap: 4px; }
+
+/* ===== REVIEWS ===== */
+.section-reviews { background: var(--bark); color: var(--cream); }
+.section-reviews .section-tag { color: var(--gold); }
+.section-reviews .section-title { color: var(--cream); }
+.section-reviews .section-desc { color: rgba(250,245,238,0.7); }
+
+.reviews-grid {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.review-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  transition: all 0.3s;
+}
+
+.review-card:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-4px);
+}
+
+.review-stars {
+  color: var(--gold);
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+}
+
+.review-text {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(250,245,238,0.85);
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.review-author {
+  display: flex; align-items: center; gap: 12px;
+}
+
+.review-author-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--leaf);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 700; font-size: 0.9rem;
+}
+
+.review-author-name { font-weight: 700; color: var(--cream); font-size: 0.95rem; }
+.review-author-role { font-size: 0.8rem; color: rgba(250,245,238,0.5); }
+
+/* ===== ABOUT ===== */
+.about-grid {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center;
+}
+
+.about-image {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 20px 60px var(--shadow);
+  aspect-ratio: 4/3;
+  background: var(--sand);
+}
+
+.about-image img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+
+.about-text h3 {
+  font-size: 1.8rem; color: var(--bark);
+  margin-bottom: 16px;
+}
+
+.about-text p {
+  color: var(--text-light);
+  margin-bottom: 16px;
+  font-size: 1rem;
+}
+
+.about-features {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-top: 28px;
+}
+
+.about-feature {
+  display: flex; align-items: flex-start; gap: 10px;
+}
+
+.about-feature-icon {
+  width: 36px; height: 36px;
+  background: rgba(74, 124, 89, 0.1);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--leaf); font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.about-feature-text {
+  font-size: 0.9rem; font-weight: 600;
+  color: var(--bark);
+}
+
+/* ===== NEWSLETTER ===== */
+.newsletter {
+  background: linear-gradient(135deg, var(--leaf), var(--moss));
+  padding: 80px 24px;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.newsletter::before {
+  content: '';
+  position: absolute; inset: 0;
+  opacity: 0.05;
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='40' cy='40' r='30' stroke='white' fill='none' stroke-width='0.5'/%3E%3C/svg%3E");
+}
+
+.newsletter h2 {
+  font-size: 2.2rem; margin-bottom: 12px;
+  position: relative;
+}
+
+.newsletter p {
+  opacity: 0.85;
+  max-width: 480px; margin: 0 auto 32px;
+  position: relative;
+}
+
+.newsletter-form {
+  display: flex; gap: 12px;
+  max-width: 460px; margin: 0 auto;
+  position: relative;
+}
+
+.newsletter-form input {
+  flex: 1;
+  padding: 14px 20px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50px;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  font-size: 0.95rem;
+  font-family: 'Source Sans 3', sans-serif;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.newsletter-form input::placeholder { color: rgba(255,255,255,0.6); }
+.newsletter-form input:focus { border-color: rgba(255,255,255,0.7); }
+
+.newsletter-form button {
+  padding: 14px 28px;
+  border-radius: 50px;
+  background: white;
+  color: var(--moss);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  font-family: 'Source Sans 3', sans-serif;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.newsletter-form button:hover { transform: scale(1.05); }
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--bark);
+  color: var(--cream);
+  padding: 60px 24px 30px;
+}
+
+.footer-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+}
+
+.footer-brand p {
+  opacity: 0.6;
+  font-size: 0.9rem;
+  margin-top: 12px;
+  max-width: 280px;
+}
+
+.footer h4 {
+  font-size: 1rem;
+  margin-bottom: 16px;
+  color: var(--gold);
+}
+
+.footer ul { list-style: none; }
+
+.footer li {
+  margin-bottom: 8px;
+}
+
+.footer li a {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.footer li a:hover { opacity: 1; }
+
+.footer-bottom {
+  max-width: 1280px; margin: 40px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex; justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem; opacity: 0.5;
+  flex-wrap: wrap; gap: 12px;
+}
+
+/* ===== BACK TO TOP ===== */
+.back-to-top {
+  position: fixed; bottom: 30px; right: 30px;
+  width: 48px; height: 48px;
+  background: var(--leaf);
+  color: white;
+  border: none; border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 20px rgba(74, 124, 89, 0.3);
+  opacity: 0; visibility: hidden;
+  transition: all 0.3s;
+  z-index: 900;
+}
+
+.back-to-top.visible { opacity: 1; visibility: visible; }
+.back-to-top:hover { transform: translateY(-3px); }
+
+/* ===== MODAL ===== */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  display: none; align-items: center; justify-content: center;
+  padding: 24px;
+}
+
+.modal-overlay.active { display: flex; }
+
+.modal {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  max-width: 700px; width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: modalIn 0.3s ease-out;
+}
+
+.modal-header {
+  position: relative;
+}
+
+.modal-header img {
+  width: 100%; height: 260px;
+  object-fit: cover;
+}
+
+.modal-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 36px; height: 36px;
+  background: rgba(255,255,255,0.9);
+  border: none; border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.3s;
+}
+
+.modal-close:hover { transform: scale(1.1); }
+
+.modal-body { padding: 32px; }
+
+.modal-body h2 {
+  font-size: 1.8rem; color: var(--bark);
+  margin-bottom: 4px;
+}
+
+.modal-body .latin {
+  font-style: italic;
+  color: var(--text-light);
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+.modal-body p {
+  color: var(--text-light);
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+}
+
+.modal-stats-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 16px; margin: 24px 0;
+}
+
+.modal-stat {
+  text-align: center; padding: 16px;
+  background: var(--sand);
+  border-radius: var(--radius);
+}
+
+.modal-stat-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 900;
+  color: var(--leaf);
+}
+
+.modal-stat-lbl {
+  font-size: 0.8rem; color: var(--text-light);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== SEARCH FILTER ===== */
+.filter-bar {
+  max-width: 1280px; margin: 0 auto 32px;
+  display: flex; gap: 12px; flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filter-btn {
+  padding: 8px 24px;
+  border-radius: 50px;
+  border: 2px solid rgba(74, 124, 89, 0.2);
+  background: transparent;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: 'Source Sans 3', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: var(--leaf);
+  color: white;
+  border-color: var(--leaf);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .hero-inner { grid-template-columns: 1fr; text-align: center; }
+  .hero p { margin-left: auto; margin-right: auto; }
+  .hero-buttons { justify-content: center; }
+  .hero-visual { max-width: 400px; margin: 0 auto; }
+  .hero-float-card.stat1 { left: -10px; }
+  .hero-float-card.stat2 { right: -10px; }
+  .catalog-grid { grid-template-columns: repeat(2, 1fr); }
+  .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-image { max-width: 500px; margin: 0 auto; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .nav { display: none; }
+  .burger { display: flex; }
+
+  .hero { min-height: auto; padding: 120px 24px 60px; }
+
+  .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .stat-number { font-size: 1.8rem; }
+
+  .section { padding: 70px 24px; }
+
+  .catalog-grid { grid-template-columns: 1fr; max-width: 500px; }
+  .reviews-grid { grid-template-columns: 1fr; max-width: 500px; }
+
+  .forum-item { flex-direction: column; gap: 12px; }
+
+  .footer-inner { grid-template-columns: 1fr; gap: 30px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+
+  .hero-float-card { display: none; }
+
+  .about-features { grid-template-columns: 1fr; }
+
+  .newsletter-form { flex-direction: column; }
+  .newsletter-form button { width: 100%; }
+
+  .modal-stats-grid { grid-template-columns: 1fr; }
+  .modal-header img { height: 200px; }
+}
+
+@media (max-width: 480px) {
+  .header-inner { height: 60px; }
+  .logo { font-size: 1.3rem; }
+  .logo-icon { width: 36px; height: 36px; font-size: 1rem; }
+
+  .hero h1 { font-size: 2.2rem; }
+  .hero-image-card { aspect-ratio: 3/4; }
+
+  .tree-card-img { height: 200px; }
+
+  .section-title { font-size: 1.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">🌳</div>
+      Blacksprut
+    </a>
+    <nav class="nav">
+      <a href="#catalog">Каталог</a>
+      <a href="#comparison">Сравнение</a>
+      <a href="#forum">Форум</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#about">О нас</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#catalog">Каталог деревьев</a>
+  <a href="#comparison">Сравнение видов</a>
+  <a href="#forum">Форум</a>
+  <a href="#reviews">Отзывы</a>
+  <a href="#about">О проекте</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span></span> Обновлено в 2026
+      </div>
+      <h1>Мир деревьев<br>начинается <em>здесь</em></h1>
+      <p>Крупнейшая русскоязычная платформа о деревьях, <b><em>Блекспрут</b></em>. Статистика, каталог видов, форум дендрологов и энтузиастов природы.</p>
+      <div class="hero-buttons">
+        <a href="#catalog" class="btn btn-primary">Исследовать каталог →</a>
+        <a href="#forum" class="btn btn-secondary">Присоединиться</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-image-card">
+        <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=600&h=750&fit=crop" alt="Величественное дерево" loading="lazy">
+      </div>
+      <div class="hero-float-card stat1">
+        <div class="float-number">73 000+</div>
+        <div class="float-label">Видов деревьев</div>
+      </div>
+      <div class="hero-float-card stat2">
+        <div class="float-number">3 трлн</div>
+        <div class="float-label">Деревьев на Земле</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<section class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item fade-in">
+      <div class="stat-number" data-target="3040000000000">3+ трлн</div>
+      <div class="stat-label">Деревьев на планете</div>
+    </div>
+    <div class="stat-item fade-in">
+      <div class="stat-number">73 000+</div>
+      <div class="stat-label">Известных видов</div>
+    </div>
+    <div class="stat-item fade-in">
+      <div class="stat-number">5 067</div>
+      <div class="stat-label">Лет — старейшее дерево</div>
+    </div>
+    <div class="stat-item fade-in">
+      <div class="stat-number">115.9 м</div>
+      <div class="stat-label">Самое высокое дерево</div>
+    </div>
+  </div>
+</section>
+
+<!-- CATALOG -->
+<section class="section" id="catalog">
+  <div class="section-header fade-in">
+    <div class="section-tag">Каталог видов</div>
+    <h2 class="section-title">Популярные деревья</h2>
+    <p class="section-desc">Изучите характеристики самых известных и любимых деревьев со всего мира собранных на маркетплейсе <b><em>black sprut</b></em></p>
+  </div>
+
+  <div class="filter-bar fade-in">
+    <button class="filter-btn active" data-filter="all">Все виды</button>
+    <button class="filter-btn" data-filter="deciduous">Листопадные</button>
+    <button class="filter-btn" data-filter="conifer">Хвойные</button>
+    <button class="filter-btn" data-filter="tropical">Тропические</button>
+  </div>
+
+  <div class="catalog-grid" id="catalogGrid">
+
+    <div class="tree-card fade-in" data-type="deciduous" data-id="0">
+      <div class="tree-card-img">
+        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=500&h=400&fit=crop" alt="Дуб" loading="lazy">
+        <div class="tree-card-badge">Листопадное</div>
+      </div>
+      <div class="tree-card-body">
+        <h3 class="tree-card-name">Дуб черешчатый</h3>
+        <div class="tree-card-latin">Quercus robur</div>
+        <p class="tree-card-desc">Могучее дерево, символ силы и долголетия. Может жить более 1000 лет. Широко распространён в Европе и западной Азии, является одним из ключевых видов лесных экосистем.</p>
+        <div class="tree-stats">
+          <div class="tree-stat">
+            <span class="tree-stat-val">до 50 м</span>
+            <span class="tree-stat-lbl">Высота</span>
+          </div>
+          <div class="tree-stat">
+            <span class="tree-stat-val">1000+ лет</span>
+            <span class="tree-stat-lbl">Возраст</span>
+          </div>
+          <div class="tree-stat">
+            <span class="tree-stat-val">Европа</span>
+            <span class="tree-stat-lbl">Ареал</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tree-card fade-in" data-type="conifer" data-id="1">
+      <div class="tree-card-img">
+        <img src="https://images.unsplash.com/photo-1576502200916-3808e07386a5?w=500&h=400&fit=crop" alt="Секвойя" loading="lazy">
+        <div class="tree-card-badge">Хвойное</div>
+      </div>
+      <div class="tree-card-body">
+        <h3 class="tree-card-name">Секвойя вечнозелёная</h3>
+        <div class="tree-card-latin">Sequoia sempervirens</div>
+        <p class="tree-card-desc">Самое высокое дерево на планете. Рекордсмен Гиперион достигает 115.9 метров. Произрастает на тихоокеанском побережье Северной Америки в туманных лесах.</p>
+        <div class="tree-stats">
+          <div class="tree-stat">
+            <span class="tree-stat-val">115.9 м</span>
+            <span class="tree-stat-lbl">Рекорд</span>
+          </div>
+          <div class="tree-stat">
+            <span class="tree-stat-val">2000+ лет</span>
+            <span class="tree-stat-lbl">Возраст</span>
+          </div>
+          <div class="tree-stat">
+            <span class="tree-stat-val">Калифорния</span>
+            <span class="tree-stat-lbl">Ареал</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tree-card fade-in" data-type="deciduous" data-id="2">
+      <div class="tree-card-img">
+        <img src="data:image/jpeg;base64,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" alt="Берёза" loading="lazy">
+        <div class="tree-card-badge">Листопадное</div>
+      </div>
+      <div class="tree-card-body">
+        <h3 class="tree-card-name">Берёза повислая</h3>
+        <div class="tree-card-latin">Betula pendula</div>
+        <p class="tree-card-desc">Один из символов России. Известна своей белой корой и изящными свисающими ветвями. Берёзовый сок — традиционный напиток многих народов.</p>
+        <div class="tree-stats">
+          <div class="tree-stat">
+            <span class="tree-stat-val">до 30 м</span>
+            <span class="tree-stat-lbl">Высота</span>
+          </div>
+          <div class="tree-stat">
+            <span class="tree-stat-val">120 лет</span>
+            <span class="tree-stat-lbl">Возраст</span>
+          </div>
+          <div class="tree-stat">
+            <span class="tree-stat-val">Евразия</span>
+            <span class="tree-stat-lbl">Ареал</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tree-card fade-in" data-type="tropical" data-id="3">
+      <div class="tree-card-img">
+        <img src="data:image/jpeg;base64,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" alt="Баобаб" loading="lazy">
+        <div class="tree-card-badge">Тропическое</div>
+      </div>
+      <div class="tree-card-body">
+        <h3 class="tree-card-name">Баобаб африканский</h3>
+        <div class="tree-card-latin">Adansonia digitata</div>
+        <p class="tree-card-desc">«Перевёрнутое дерево» с массивным стволом диаметром до 11 метров. Хранит до 120 000 литров воды. Священное дерево во многих африканских культурах.</p>
+        <div class="tree-stats">
+          <div class="tree-stat">
+            <span class="tree-stat-val">до 25 м</span>
+            <span class="tree-stat-lbl">Высота</span>
+          </div>
+          <div class="tree-stat">
+            <span class="tree-stat-val">3000+ лет</span>
+            <span class="tree-stat-lbl">Возраст</span>
+          </div>
+          <div class="tree-stat">
+            <span class="tree-stat-val">Африка</span>
+            <span class="tree-stat-lbl">Ареал</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tree-card fade-in" data-type="conifer" data-id="4">
+      <div class="tree-card-img">
+        <img src="https://images.unsplash.com/photo-1544084944-15269ec7b5a0?w=500&h=400&fit=crop" alt="Сосна" loading="lazy">
+        <div class="tree-card-badge">Хвойное</div>
+      </div>
+      <div class="tree-card-body">
+        <h3 class="tree-card-name">Сосна обыкновенная</h3>
+        <div class="tree-card-latin">Pinus sylvestris</div>
+        <p class="tree-card-desc">Одно из самых распространённых хвойных деревьев Евразии. Славится целебным воздухом сосновых боров и ценной древесиной. Невероятно морозоустойчива.</p>
+        <div class="tree-stats">
+          <div class="tree-stat">
+            <span class="tree-stat-val">до 40 м</span>
+            <span class="tree-stat-lbl">Высота</span>
+          </div>
+          <div class="tree-stat">
+            <span class="tree-stat-val">600 лет</span>
+            <span class="tree-stat-lbl">Возраст</span>
+          </div>
+          <div class="tree-stat">
+            <span class="tree-stat-val">Евразия</span>
+            <span class="tree-stat-lbl">Ареал</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tree-card fade-in" data-type="deciduous" data-id="5">
+      <div class="tree-card-img">
+        <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=500&h=400&fit=crop" alt="Сакура" loading="lazy">
+        <div class="tree-card-badge">Листопадное</div>
+      </div>
+      <div class="tree-card-body">
+        <h3 class="tree-card-name">Сакура (Вишня мелкопильчатая)</h3>
+        <div class="tree-card-latin">Prunus serrulata</div>
+        <p class="tree-card-desc">Символ Японии и мимолётности красоты. Цветение сакуры — важнейшее культурное событие, привлекающее миллионы людей по всему миру каждую весну.</p>
+        <div class="tree-stats">
+          <div class="tree-stat">
+            <span class="tree-stat-val">до 12 м</span>
+            <span class="tree-stat-lbl">Высота</span>
+          </div>
+          <div class="tree-stat">
+            <span class="tree-stat-val">100 лет</span>
+            <span class="tree-stat-lbl">Возраст</span>
+          </div>
+          <div class="tree-stat">
+            <span class="tree-stat-val">Вост. Азия</span>
+            <span class="tree-stat-lbl">Ареал</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="section section-compare" id="comparison">
+  <div class="section-header fade-in">
+    <div class="section-tag">Статистика</div>
+    <h2 class="section-title">Сравнение характеристик</h2>
+    <p class="section-desc">Наглядная таблица ключевых параметров популярных видов деревьев на сайте <b><em>блэкспрут</b></em></p>
+  </div>
+
+  <div class="compare-wrap fade-in">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Вид</th>
+          <th>Макс. высота</th>
+          <th>Макс. возраст</th>
+          <th>Скорость роста</th>
+          <th>Морозост.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Дуб черешчатый</td>
+          <td>50 м <div class="bar-visual" style="width: 43%"></div></td>
+          <td>1 500 лет</td>
+          <td>Медленная</td>
+          <td>−40 °C</td>
+        </tr>
+        <tr>
+          <td>Секвойя</td>
+          <td>115.9 м <div class="bar-visual" style="width: 100%"></div></td>
+          <td>2 200 лет</td>
+          <td>Быстрая</td>
+          <td>−15 °C</td>
+        </tr>
+        <tr>
+          <td>Берёза повислая</td>
+          <td>30 м <div class="bar-visual" style="width: 26%"></div></td>
+          <td>120 лет</td>
+          <td>Быстрая</td>
+          <td>−50 °C</td>
+        </tr>
+        <tr>
+          <td>Баобаб</td>
+          <td>25 м <div class="bar-visual" style="width: 22%"></div></td>
+          <td>3 000 лет</td>
+          <td>Медленная</td>
+          <td>+5 °C</td>
+        </tr>
+        <tr>
+          <td>Сосна обыкновенная</td>
+          <td>40 м <div class="bar-visual" style="width: 35%"></div></td>
+          <td>600 лет</td>
+          <td>Средняя</td>
+          <td>−55 °C</td>
+        </tr>
+        <tr>
+          <td>Сакура</td>
+          <td>12 м <div class="bar-visual" style="width: 10%"></div></td>
+          <td>100 лет</td>
+          <td>Средняя</td>
+          <td>−25 °C</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FORUM -->
+<section class="section" id="forum">
+  <div class="section-header fade-in">
+    <div class="section-tag">Сообщество</div>
+    <h2 class="section-title">Форум дендрологов</h2>
+    <p class="section-desc">Обсуждения, вопросы и советы от экспертов и любителей деревьев на зеркале <b><em>Blacksprut</b></em></p>
+  </div>
+
+  <div class="forum-list">
+    <div class="forum-item fade-in">
+      <div class="forum-avatar">АК</div>
+      <div class="forum-content">
+        <div class="forum-title-row">
+          <span class="forum-topic-title">Как определить возраст дерева без спила?</span>
+          <span class="forum-tag tag-question">Вопрос</span>
+          <span class="forum-tag tag-hot">Горячая тема</span>
+        </div>
+        <p class="forum-excerpt">Есть ли надёжные неинвазивные методы определения возраста? Слышал про дендрохронологию с бурением, но хотелось бы совсем без повреждений...</p>
+        <div class="forum-meta">
+          <span>👤 Алексей К.</span>
+          <span>💬 47 ответов</span>
+          <span>👁 1.2k просм.</span>
+          <span>🕐 2 часа назад</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="forum-item fade-in">
+      <div class="forum-avatar" style="background: linear-gradient(135deg, var(--gold), #9A7A20);">МВ</div>
+      <div class="forum-content">
+        <div class="forum-title-row">
+          <span class="forum-topic-title">Фотоотчёт: вековые дубы Беловежской пущи</span>
+          <span class="forum-tag tag-discussion">Обсуждение</span>
+        </div>
+        <p class="forum-excerpt">Прошлой осенью удалось побывать в Беловежской пуще. Делюсь фотографиями дубов-великанов, некоторым из которых более 600 лет. Впечатления невероятные!</p>
+        <div class="forum-meta">
+          <span>👤 Марина В.</span>
+          <span>💬 32 ответа</span>
+          <span>👁 890 просм.</span>
+          <span>🕐 5 часов назад</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="forum-item fade-in">
+      <div class="forum-avatar" style="background: linear-gradient(135deg, #6B5E54, var(--bark));">ДЛ</div>
+      <div class="forum-content">
+        <div class="forum-title-row">
+          <span class="forum-topic-title">Руководство по посадке хвойных в средней полосе</span>
+          <span class="forum-tag tag-guide">Руководство</span>
+        </div>
+        <p class="forum-excerpt">Составил подробный гайд по посадке сосен, елей и можжевельников. Оптимальные сроки, подготовка почвы, схемы посадки и уход в первые годы.</p>
+        <div class="forum-meta">
+          <span>👤 Дмитрий Л.</span>
+          <span>💬 63 ответа</span>
+          <span>👁 2.4k просм.</span>
+          <span>🕐 1 день назад</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="forum-item fade-in">
+      <div class="forum-avatar" style="background: linear-gradient(135deg, #B33, #800);">ЕС</div>
+      <div class="forum-content">
+        <div class="forum-title-row">
+          <span class="forum-topic-title">Почему гибнут каштаны в городах?</span>
+          <span class="forum-tag tag-discussion">Обсуждение</span>
+          <span class="forum-tag tag-hot">Горячая тема</span>
+        </div>
+        <p class="forum-excerpt">Заметила, что каштаны в нашем городе массово болеют. Листья сохнут уже в июле. Это каштановая минирующая моль или что-то другое? Кто сталкивался?</p>
+        <div class="forum-meta">
+          <span>👤 Елена С.</span>
+          <span>💬 28 ответов</span>
+          <span>👁 670 просм.</span>
+          <span>🕐 3 дня назад</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="forum-item fade-in">
+      <div class="forum-avatar" style="background: linear-gradient(135deg, #4A7C59, #2D5016);">ИП</div>
+      <div class="forum-content">
+        <div class="forum-title-row">
+          <span class="forum-topic-title">Бонсай из клёна: мой 10-летний опыт</span>
+          <span class="forum-tag tag-guide">Руководство</span>
+        </div>
+        <p class="forum-excerpt">Формировал бонсай из клёна остролистного последние 10 лет. Рассказываю про ошибки, удачи, технику обрезки и зимовку в наших условиях.</p>
+        <div class="forum-meta">
+          <span>👤 Игорь П.</span>
+          <span>💬 91 ответ</span>
+          <span>👁 3.8k просм.</span>
+          <span>🕐 1 неделю назад</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section section-reviews" id="reviews">
+  <div class="section-header fade-in">
+    <div class="section-tag">Отзывы</div>
+    <h2 class="section-title">Что говорят наши участники</h2>
+    <p class="section-desc">Мнения экспертов и энтузиастов о нашей платформе</p>
+  </div>
+
+  <div class="reviews-grid">
+    <div class="review-card fade-in">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">«Лучший русскоязычный ресурс о деревьях! Пользуюсь каталогом для подготовки лекций в университете. Данные актуальные и хорошо структурированные.»</p>
+      <div class="review-author">
+        <div class="review-author-avatar">ОН</div>
+        <div>
+          <div class="review-author-name">Ольга Новикова</div>
+          <div class="review-author-role">к.б.н., доцент МГУ</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card fade-in">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">«Форум — настоящая находка. Здесь собрались люди, которые действительно разбираются в дендрологии. Получил массу полезных советов по уходу за садом.»</p>
+      <div class="review-author">
+        <div class="review-author-avatar" style="background: var(--gold);">ВТ</div>
+        <div>
+          <div class="review-author-name">Виктор Тарасов</div>
+          <div class="review-author-role">Ландшафтный дизайнер</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card fade-in">
+      <div class="review-stars">★★★★☆</div>
+      <p class="review-text">«Удобная сравнительная таблица видов помогает быстро подобрать деревья для озеленения. Хотелось бы ещё больше тропических видов в каталоге!»</p>
+      <div class="review-author">
+        <div class="review-author-avatar" style="background: var(--bark-light);">АМ</div>
+        <div>
+          <div class="review-author-name">Анна Миронова</div>
+          <div class="review-author-role">Эколог, волонтёр</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="about-grid">
+    <div class="about-image fade-in">
+      <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=450&fit=crop" alt="Лес" loading="lazy">
+    </div>
+    <div class="about-text fade-in">
+      <div class="section-tag">О проекте</div>
+      <h3><b><em>Blacksprut</b></em>— больше, чем энциклопедия</h3>
+      <p>Мы создали эту платформу в 2021 году, чтобы объединить знания о деревьях в одном месте. Цель <b><em>Блэк спрут</b></em> — помочь людям лучше понимать и беречь леса нашей планеты.</p>
+      <p>За 5 лет работы <b><em>blacksprut</b></em> собрали крупнейшую базу данных видов деревьев на русском языке и создали активное сообщество из более чем 12 000 участников.</p>
+      <div class="about-features">
+        <div class="about-feature">
+          <div class="about-feature-icon">📊</div>
+          <div class="about-feature-text">Проверенная статистика</div>
+        </div>
+        <div class="about-feature">
+          <div class="about-feature-icon">🔬</div>
+          <div class="about-feature-text">Научный подход</div>
+        </div>
+        <div class="about-feature">
+          <div class="about-feature-icon">🌍</div>
+          <div class="about-feature-text">Глобальный охват</div>
+        </div>
+        <div class="about-feature">
+          <div class="about-feature-icon">👥</div>
+          <div class="about-feature-text">Живое сообщество</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <h2>Подпишитесь на обновления</h2>
+  <p>Получайте новые статьи, обзоры видов и дайджест лучших обсуждений форума</p>
+  <form class="newsletter-form" id="newsletterForm">
+    <input type="email" placeholder="Ваш email" required>
+    <button type="submit">Подписаться</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo" style="color: var(--cream);">
+        <div class="logo-icon">🌳</div>
+        Blacksprut
+      </div>
+      <p>Крупнейшая русскоязычная платформа о деревьях. Каталог, статистика, форум и сообщество дендрологов.</p>
+    </div>
+    <div>
+      <h4>Разделы</h4>
+      <ul>
+        <li><a href="#catalog">Каталог видов</a></li>
+        <li><a href="#comparison">Сравнение</a></li>
+        <li><a href="#forum">Форум</a></li>
+        <li><a href="#reviews">Отзывы</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ресурсы</h4>
+      <ul>
+        <li><a href="#">Блог</a></li>
+        <li><a href="#">Исследования</a></li>
+        <li><a href="#">API данных</a></li>
+        <li><a href="#">Партнёрам</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Поддержка</h4>
+      <ul>
+        <li><a href="#">Помощь</a></li>
+        <li><a href="#">Контакты</a></li>
+        <li><a href="#">Правила</a></li>
+        <li><a href="#">Конфиденциальность</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Blacksprut. Все права защищены.</span>
+    <span>Сделано с 🌱 для любителей природы</span>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" aria-label="Наверх">↑</button>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <img id="modalImg" src="" alt="">
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+    <div class="modal-body">
+      <h2 id="modalName"></h2>
+      <div class="latin" id="modalLatin"></div>
+      <div class="modal-stats-grid" id="modalStats"></div>
+      <p id="modalDesc"></p>
+      <p id="modalExtra"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+// === DATA ===
+const treesData = [
+  {
+    name: 'Дуб черешчатый', latin: 'Quercus robur',
+    img: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=700&h=500&fit=crop',
+    desc: 'Дуб черешчатый — одно из самых величественных деревьев Европы. Достигает высоты 50 метров и может жить более 1500 лет. Его древесина ценится за прочность и красоту текстуры.',
+    extra: 'Дуб играет ключевую роль в лесных экосистемах: его жёлуди служат пищей для десятков видов животных, а крона создаёт уникальный микроклимат. Знаменитый Стелмужский дуб в Литве считается старейшим в Европе — ему около 2000 лет.',
+    stats: [
+      { val: 'до 50 м', lbl: 'Высота' },
+      { val: '1 500 лет', lbl: 'Макс. возраст' },
+      { val: '−40 °C', lbl: 'Морозоустойч.' }
+    ]
+  },
+  {
+    name: 'Секвойя вечнозелёная', latin: 'Sequoia sempervirens',
+    img: 'https://images.unsplash.com/photo-1576502200916-3808e07386a5?w=700&h=500&fit=crop',
+    desc: 'Секвойя — самое высокое дерево на Земле. Экземпляр «Гиперион» достигает 115.9 м. Произрастает в туманных лесах тихоокеанского побережья Калифорнии и южного Орегона.',
+    extra: 'Кора секвойи может достигать 30 см толщины и обладает огнестойкими свойствами. Дерево способно впитывать влагу из тумана через хвою, что помогает выживать в засушливые периоды. Национальный парк «Редвуд» в Калифорнии хранит самые впечатляющие рощи.',
+    stats: [
+      { val: '115.9 м', lbl: 'Макс. высота' },
+      { val: '2 200 лет', lbl: 'Макс. возраст' },
+      { val: '7 м', lbl: 'Диаметр ствола' }
+    ]
+  },
+  {
+    name: 'Берёза повислая', latin: 'Betula pendula',
+    img: 'https://images.unsplash.com/photo-1462275646964-a0e3c11f18a6?w=700&h=500&fit=crop',
+    desc: 'Берёза повислая — один из главных символов России. Характерная белая кора содержит бетулин — вещество, защищающее от грибков и придающее стволу знаменитый белый цвет.',
+    extra: 'Весной берёза выделяет до 150 литров сока в сутки. Берёзовый дёготь веками использовался в народной медицине. Берёза — дерево-пионер: одной из первых заселяет пустующие территории, подготавливая почву для других видов.',
+    stats: [
+      { val: 'до 30 м', lbl: 'Высота' },
+      { val: '120 лет', lbl: 'Макс. возраст' },
+      { val: '150 л/сут', lbl: 'Сокоотделение' }
+    ]
+  },
+  {
+    name: 'Баобаб африканский', latin: 'Adansonia digitata',
+    img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&h=500&fit=crop',
+    desc: 'Баобаб — «дерево жизни» Африки. Его массивный ствол может достигать 11 метров в диаметре и хранить до 120 000 литров воды. Живёт более 3000 лет.',
+    extra: 'Плоды баобаба содержат в 6 раз больше витамина C, чем апельсины. Полый ствол старых деревьев использовали как жилище, тюрьму и даже автобусную остановку. К сожалению, с 2005 года учёные фиксируют массовую гибель старейших баобабов Африки.',
+    stats: [
+      { val: 'до 25 м', lbl: 'Высота' },
+      { val: '11 м', lbl: 'Диаметр ствола' },
+      { val: '120 000 л', lbl: 'Запас воды' }
+    ]
+  },
+  {
+    name: 'Сосна обыкновенная', latin: 'Pinus sylvestris',
+    img: 'https://images.unsplash.com/photo-1544084944-15269ec7b5a0?w=700&h=500&fit=crop',
+    desc: 'Сосна обыкновенная — одно из самых распространённых и жизнестойких хвойных деревьев. Занимает огромный ареал от Испании до Сибири. Выдерживает морозы до −55 °C.',
+    extra: 'Сосновые боры известны целебным воздухом: фитонциды сосны уничтожают болезнетворные бактерии. Древесина ценится в строительстве, а живица используется для производства канифоли и скипидара. Старейшая сосна в Лапландии прожила более 760 лет.',
+    stats: [
+      { val: 'до 40 м', lbl: 'Высота' },
+      { val: '−55 °C', lbl: 'Морозоустойч.' },
+      { val: '760 лет', lbl: 'Рекорд возраста' }
+    ]
+  },
+  {
+    name: 'Сакура', latin: 'Prunus serrulata',
+    img: 'https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=700&h=500&fit=crop',
+    desc: 'Сакура — декоративная вишня, символ Японии. Цветение «ханами» длится лишь 7–10 дней, но привлекает миллионы людей. Существует более 200 сортов.',
+    extra: 'Цветение сакуры движется по Японии «фронтом» с юга на север с конца марта по май. Японская метеорологическая служба ежегодно публикует прогноз цветения. Лепестки сакуры используют в японской кухне — их маринуют и добавляют в чай и десерты.',
+    stats: [
+      { val: 'до 12 м', lbl: 'Высота' },
+      { val: '7–10 дней', lbl: 'Цветение' },
+      { val: '200+', lbl: 'Сортов' }
+    ]
+  }
+];
+
+// === HEADER SCROLL ===
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// === BURGER MENU ===
+const burger = document.getElementById('burger');
+const mobileNav = document.getElementById('mobileNav');
+
+burger.addEventListener('click', () => {
+  burger.classList.toggle('active');
+  mobileNav.classList.toggle('active');
+  document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+});
+
+mobileNav.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    burger.classList.remove('active');
+    mobileNav.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+});
+
+// === BACK TO TOP ===
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  backToTop.classList.toggle('visible', window.scrollY > 600);
+});
+backToTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// === SCROLL ANIMATIONS ===
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -40px 0px' };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// === FILTER ===
+const filterBtns = document.querySelectorAll('.filter-btn');
+const cards = document.querySelectorAll('.tree-card');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+
+    cards.forEach(card => {
+      const match = filter === 'all' || card.dataset.type === filter;
+      card.style.display = match ? '' : 'none';
+      if (match) {
+        card.classList.remove('visible');
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => card.classList.add('visible'));
+        });
+      }
+    });
+  });
+});
+
+// === MODAL ===
+const modalOverlay = document.getElementById('modalOverlay');
+const modalClose = document.getElementById('modalClose');
+
+cards.forEach(card => {
+  card.addEventListener('click', () => {
+    const id = parseInt(card.dataset.id);
+    const tree = treesData[id];
+    if (!tree) return;
+
+    document.getElementById('modalImg').src = tree.img;
+    document.getElementById('modalName').textContent = tree.name;
+    document.getElementById('modalLatin').textContent = tree.latin;
+    document.getElementById('modalDesc').textContent = tree.desc;
+    document.getElementById('modalExtra').textContent = tree.extra;
+
+    const statsGrid = document.getElementById('modalStats');
+    statsGrid.innerHTML = tree.stats.map(s =>
+      `<div class="modal-stat"><div class="modal-stat-val">${s.val}</div><div class="modal-stat-lbl">${s.lbl}</div></div>`
+    ).join('');
+
+    modalOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+modalClose.addEventListener('click', closeModal);
+modalOverlay.addEventListener('click', (e) => {
+  if (e.target === modalOverlay) closeModal();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+function closeModal() {
+  modalOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// === NEWSLETTER ===
+document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const input = e.target.querySelector('input');
+  const btn = e.target.querySelector('button');
+  btn.textContent = '✓ Подписано!';
+  btn.style.background = 'var(--gold)';
+  btn.style.color = 'var(--bark)';
+  input.value = '';
+  setTimeout(() => {
+    btn.textContent = 'Подписаться';
+    btn.style.background = '';
+    btn.style.color = '';
+  }, 3000);
+});
+
+// === SMOOTH SCROLL FOR NAV ===
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
